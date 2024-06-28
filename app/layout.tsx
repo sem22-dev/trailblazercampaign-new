@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar2 from "@/components/navbar";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <div className="background-container">
+         {/* <div className="absolute w-full h-full opacity-100 z-10 ">
+          <Image src={'/eclipse.png'} width={1500} height={1500} alt="background" />
+          </div> */}
+          <div className="absolute w-full h-full opacity-100 z-10 ">
+          <Image src={'/eclipse.png'} width={1500} height={1500} alt="background" />
+          </div>
+            {/* <div className="absolute w-full h-full opacity-100 z-10 border ">
+            <Image src={'/planet.svg'} width={1500} height={1500} alt="background" />
+            </div> */}
+          <div className="side-grad"></div>
+          <div className="side-gradient"></div>
+          <div className="content">
+            <Navbar2 />
+            {children}
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
