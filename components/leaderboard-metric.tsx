@@ -9,19 +9,19 @@ export default function LeaderboardMetrics(){
         <main className="min-h-screen my-8">
         <div className="overflow-x-auto">
           <table className="min-w-full">
-            <thead className="bg-[#252B36] text-[#717A8C]">
+            <thead className="bg-[#252B36] text-[#717A8C] text-sm">
               <tr>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">#</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Wallet</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Rank</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Age</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Labels</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Balance,$</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">NFTs</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Twitter</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Activity</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider">Contacts</th>
-                <th scope="col" className="px-1 py-3 text-left text-xs font-medium tracking-wider"></th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">#</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Wallet</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Rank</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Age</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Labels</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Balance,$</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">NFTs</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Twitter</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Activity</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider">Contacts</th>
+                <th scope="col" className="px-1 py-3 text-left tracking-wider"></th>
               </tr>
             </thead>
             
