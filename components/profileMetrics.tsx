@@ -18,10 +18,24 @@ const ProfileMetrics = () => {
     { rank: 12, name: 'Karen', totalMints: 600, imageUrl: '/profile1.svg' },
   ];
 
+  const gradientColors = {
+    start: '#FFC876',
+    mid1: '#79FFF7',
+    mid2: '#9F53FF',
+    end: '#FF98E2',
+  };
+
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3  xl:grid-cols-5 grid-rows-6  gap-4">
       {/* Rank 1 */}
-      <div className="col-span-2 rounded-xl profile-bg bg-opacity-20 row-span-2 border border-[#434343] flex flex-col gap-6 items-center text-white text-xl relative px-4 py-12">
+      <div
+      className="col-span-2 rounded-xl profile-bg bg-opacity-20 row-span-2 border flex flex-col gap-6 items-center text-white text-xl relative px-4 py-12"
+        style={{
+            borderImage: `linear-gradient(to right, ${gradientColors.start}, ${gradientColors.mid1}, ${gradientColors.mid2}, ${gradientColors.end}) 1`,
+            borderRadius: '24px'
+          }}
+      
+      >
         <div className="absolute top-12 left-12 bg-[#232229] w-12 h-12 flex items-center justify-center rounded-full text-lg">1</div>
         <Image src={profiles[0].imageUrl} alt="Profile" width={1000} height={1000} className=" w-56 h-56 rounded-full" />
         <div className="text-center text-4xl font-medium">{profiles[0].name}</div>

@@ -35,7 +35,7 @@ export default function Navbar2() {
 
   const navItems = [
     { name: 'GET STARTED', href: '/' },
-    { name: 'LEADEROARD', href: '/' },
+    { name: 'LEADEROARD', href: '/leaderboard' },
     { name: 'CREATE', href: '/' },
     { name: 'FAQ', href: '/' },
   ];
@@ -44,10 +44,12 @@ export default function Navbar2() {
     <div className={`${pathname === '/authentication' || pathname === '/authentication/login' || pathname === '/authentication/login/reset' ? "hidden" : "inline"}`}>
       {/* Larger screen navigation */}
       <nav className=" px-2 sm:px-6 lg:px-12 z-50 hidden md:flex py-3 items-center justify-between border-b border-[#292929]">
+      <Link href={'/'} className='z-50'>
         <Image src={'/logo.svg'} width={100} height={100} alt='logo' className=' cursor-pointer z-50'/>
+      </Link>
         <div className={`items-center p-2 z-50 rounded-full text-white text-sm space-x-10 hidden md:flex md:space-x-10 lg:space-x-20`}> 
             {navItems.map((item,index) => (
-              <h1 className=' cursor-pointer'>{item.name}</h1>
+              <Link href={item.href} className=' cursor-pointer'>{item.name}</Link>
             ))}
         </div>
         <div className="flex gap-3 text-white z-50  items-center">

@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar2 from "@/components/navbar";
 import Image from "next/image";
+import Eclipse from "@/components/eclipse";
+import TopLeft from "@/components/topLeft-grad";
+import Planets from "@/components/planet-icons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,17 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <div className="background-container">
-         {/* <div className="absolute w-full h-full opacity-100 z-10 ">
-          <Image src={'/eclipse.png'} width={1500} height={1500} alt="background" />
-          </div> */}
-          <div className="absolute w-full h-full opacity-100 z-10 ">
-          <Image src={'/eclipse.png'} width={1500} height={1500} alt="background" />
-          </div>
-            {/* <div className="absolute w-full h-full opacity-100 z-10 border ">
-            <Image src={'/planet.svg'} width={1500} height={1500} alt="background" />
-            </div> */}
-          <div className="side-grad"></div>
-          <div className="side-gradient"></div>
+          <Eclipse />
+          <Planets />
+          <TopLeft />
           <div className="content">
             <Navbar2 />
             {children}
