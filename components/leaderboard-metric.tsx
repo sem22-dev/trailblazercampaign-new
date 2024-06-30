@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image  from "next/image";
+import Link from "next/link";
 
 
 export default function LeaderboardMetrics(){
@@ -32,7 +33,7 @@ export default function LeaderboardMetrics(){
                   <td className="px-1 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center gap-4">
                         <Image src={'/avatar-example.svg'} height={35} width={35} alt="avatar"/>
-                        <h1>Sem.eth</h1>
+                        <Link href={'/p/sem.eth'}>Sem.eth</Link>
                     </div>
                   </td>
                   <td className="px-1 py-4 whitespace-nowrap text-sm font-medium"><h1 className="border w-fit py-1 px-2 rounded-xl border-[#32D74B] text-[#32D74B] font-medium bg-[#274539]">92</h1></td>
