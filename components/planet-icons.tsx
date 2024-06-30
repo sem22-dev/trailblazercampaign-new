@@ -8,7 +8,7 @@ export default function Planets(){
     const pathname = usePathname()
 
     return(
-        <div className={`absolute w-full h-full opacity-100 ${pathname == '/leaderboard' ? 'hidden' : 'block'}`}>
+        <div className={`absolute w-full h-full opacity-100 ${pathname == '/leaderboard' || '/p' ? 'hidden' : 'block'}`}>
             <Image src={'/planet.svg'} width={1500} height={1500} alt="background" />
         </div>
     )

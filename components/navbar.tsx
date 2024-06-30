@@ -41,9 +41,9 @@ export default function Navbar2() {
   ];
 
   return (
-    <div className={`${pathname === '/authentication' || pathname === '/authentication/login' || pathname === '/authentication/login/reset' ? "hidden" : "inline"}`}>
+    <div className={`${pathname === '/authentication' || pathname === '/authentication/login' || pathname === '/authentication/login/reset' ? "hidden" : "inline"} `}>
       {/* Larger screen navigation */}
-      <nav className=" px-2 sm:px-6 lg:px-12 z-50 hidden md:flex py-3 items-center justify-between border-b border-[#292929]">
+      <nav className={` px-2 sm:px-6 lg:px-12 z-50 hidden md:flex py-3 items-center justify-between border-b border-[#292929] ${pathname == '/leaderboard' || '/p' ? 'bg-[#252B36] border-b border-[#303030]' : ''}`}>
       <Link href={'/'} className='z-50'>
         <Image src={'/logo.svg'} width={100} height={100} alt='logo' className=' cursor-pointer z-50'/>
       </Link>
