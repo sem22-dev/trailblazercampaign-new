@@ -13,7 +13,7 @@ export default function UpdateProfile() {
     const [discord, setDiscord] = useState('@discord_sem');
     const [bio, setBio] = useState('Life Goes on...');
 
-    const handleOpenModal = (field) => {
+    const handleOpenModal = (field:any) => {
         setUpdateField(field);
         setIsModalOpen(true);
     };
@@ -22,7 +22,7 @@ export default function UpdateProfile() {
         setIsModalOpen(false);
     };
 
-    const handleUpdate = (e) => {
+    const handleUpdate = (e:any) => {
         e.preventDefault();
         const updatedValue = e.target.elements.updateInput.value;
 
