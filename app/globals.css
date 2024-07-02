@@ -19,6 +19,7 @@ body {
     background: url('../public/top-grad.png') no-repeat;
     background-size: cover; /* Ensure the gradient image covers the element */
     z-index: 1;
+    
   }
 
 .glass {

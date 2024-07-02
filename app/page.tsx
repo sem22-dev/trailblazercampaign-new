@@ -1,4 +1,6 @@
 import ProfileMetrics from "@/components/profileMetrics";
+import TopCreators from "../components/top-creators";
+import TopSellers from "../components/top-sellers";
 import Image from "next/image";
 
 export default function Home() {
@@ -102,47 +104,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className=" py-16 px-2 sm:px-6 relative lg:px-12">
-              <div className=" z-50 h-32 -mt-32 left-0  absolute  w-full gradient-background"></div>
-              <div>
-                <h1 className=" text-[#E176FF] text-4xl font-bold">Top of the top</h1>
-                <h1 className="text-2xl font-semibold mt-2">Check out the top here at mintpad</h1>
-              </div>
-
-              <div className=" flex items-center gap-4 my-12">
-                  <button
-                  className='flex  text-white z-50 items-center px-8 py-2 cursor-pointer button-gradient rounded-full'
-                  >
-                    SIGN UP
-                  </button>
-
-                     <button
-                  className='flex  text-white z-50  items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full'
-                  >
-                    Most Holders
-                  </button>
-
-                  <button
-                  className='flex  text-white z-50  items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full'
-                  >
-                    Most Transfers
-                  </button>
-
-                  <button
-                  className='flex  text-white z-50  items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full'
-                  >
-                    Cars
-                  </button>
-
-                  <button
-                  className='flex  text-white z-50  items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full'
-                  >
-                    Art
-                  </button>
-              </div>
-
-             <ProfileMetrics />
-            </div>
+            <TopSellers />
+            <ProfileMetrics />
+            <TopCreators />
 
     </main>
   );

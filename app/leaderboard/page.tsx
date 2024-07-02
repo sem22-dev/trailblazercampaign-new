@@ -101,16 +101,16 @@ function Filter() {
         <div className="absolute mt-2 bg-[#333945] text-white rounded-md shadow-lg w-full py-2">
           <ul>
             <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Apple
+              Top Minter
             </li>
             <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Mango
+           Top Collection
             </li>
             <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Banana
+             Top 10
             </li>
             <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Grapes
+      Top 20
             </li>
           </ul>
         </div>
