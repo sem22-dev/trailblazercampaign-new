@@ -41,24 +41,25 @@ export default function UpdateProfile() {
                 setFinalVersion(extractedValue);
             }
         }
-
-        // Fetch NFTs data when component mounts
-        fetchNFTsData();
     }, []);
 
-    // Fetch NFTs data from API
-    async function fetchNFTsData() {
-        try {
-            const response = await axios.get('http://localhost:3000/getdetails');
-            const data = response.data;
+    useEffect(() => {
+        if (valueAfterP) {
+            fetchNFTsData(valueAfterP);
+        }
+    }, [valueAfterP]);
 
-            // Extract nfts data from each item in the array
-            const nftsData = data.map((item: { nfts: any }) => item.nfts);
+    // Fetch NFTs data from API
+    async function fetchNFTsData(valueAfterP: string) {
+        try {
+            const response = await axios.get(`http://localhost:3000/gettotalmint/${valueAfterP}`);
+            const data = response.data;
+            console.log(data);
 
             // Update state with fetched nftsData
-            setNftsData(nftsData);
+            setNftsData(data.nfts);
 
-            console.log('NFTs Data:', nftsData);
+            console.log('NFTs Data:', data.nfts);
         } catch (error) {
             console.error('Error fetching details:', error);
         }
@@ -145,20 +146,35 @@ export default function UpdateProfile() {
     };
 
     const handleSignMessage = async () => {
-        if (!web3) return;
-
+        // Ensure web3 is available
+        if (!web3) {
+            console.error("web3 is not initialized");
+            return;
+        }
+    
+        // Define the message to be signed
         const message = 'hello test';
-
+    
+        // Ensure walletAddress is valid
+        if (!walletAddress) {
+            console.error("walletAddress is null or undefined");
+            alert('Wallet address is not available. Please connect your wallet.');
+            return;
+        }
+    
         try {
+            // Attempt to sign the message
             const signature = await web3.eth.personal.sign(message, walletAddress, '');
             console.log('Signature:', signature);
             setIsSigned(true);
             alert('Message signed successfully!');
         } catch (error) {
+            // Handle any errors that occur during the signing process
             console.error('Error signing message:', error);
+            alert(`Error signing message:`);
         }
     };
-
+    
     const handleSaveDetails = async () => {
         if (!isSigned) {
             alert('Please sign the message first!');
@@ -350,3 +366,4 @@ export default function UpdateProfile() {
         </div>
     );
 }
+
