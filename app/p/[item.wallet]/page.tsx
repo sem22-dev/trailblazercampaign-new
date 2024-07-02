@@ -52,7 +52,7 @@ export default function UpdateProfile() {
     // Fetch NFTs data from API
     async function fetchNFTsData(valueAfterP: string) {
         try {
-            const response = await axios.get(`http://localhost:3000/gettotalmint/${valueAfterP}`);
+            const response = await axios.get(`/api/totalmint/${valueAfterP}`);
             const data = response.data;
             console.log(data);
 
@@ -182,7 +182,7 @@ export default function UpdateProfile() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/api/taikocampaign', {
+            const response = await axios.post('/api/taikocampaign', {
                 profilepic: base64Image,
                 categories,
                 twitter: `https://x.com/${twitter}`, // Suffixing twitter with https://x.com/

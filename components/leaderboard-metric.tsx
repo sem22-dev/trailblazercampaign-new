@@ -20,7 +20,7 @@ export default function LeaderboardMetrics() {
   const [data, setData] = useState<LeaderboardData[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/getdetails')
+    fetch('/api/getdetails')
       .then(response => response.json())
       .then((data) => {
         const modifiedData = data.map((item: { labels: string; }) => ({
