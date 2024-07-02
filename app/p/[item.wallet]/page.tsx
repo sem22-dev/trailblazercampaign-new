@@ -9,7 +9,7 @@ export default function UpdateProfile() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [updateField, setUpdateField] = useState('');
     const [twitter, setTwitter] = useState('');
-    const [bio, setBio] = useState('Life Goes on...');
+    const [bio, setBio] = useState('');
     const [profilePicture, setProfilePicture] = useState('/avatar-example.svg');
     const [valueAfterP, setValueAfterP] = useState('');
     const [finalVersion, setFinalVersion] = useState('');
@@ -81,7 +81,7 @@ export default function UpdateProfile() {
             updateInput: HTMLInputElement;
         };
         const updatedValue = formElements.updateInput.value;
-
+    
         if (updateField === 'twitter') setTwitter(updatedValue);
         if (updateField === 'bio') setBio(updatedValue);
         if (updateField === 'username') setUsername(updatedValue);
@@ -90,10 +90,11 @@ export default function UpdateProfile() {
             console.log('Base64 Image:', base64Image);
         }
         if (updateField === 'categories') setCategories(updatedValue);
-
+    
         handleCloseModal();
         await handleSaveDetails();
     };
+    
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -249,6 +250,7 @@ export default function UpdateProfile() {
                             onClick={() => handleOpenModal('bio')}
                         >
                             Update Bio
+                            
                         </button>
                     </div>
                 </div>
@@ -318,46 +320,50 @@ export default function UpdateProfile() {
 
             {/* Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-[#333945] p-8 rounded-xl w-96">
-                        <h2 className="text-2xl font-semibold mb-4">Update {updateField}</h2>
-                        <form onSubmit={handleUpdate}>
-                            <input
-                                type="text"
-                                name="updateInput"
-                                className="w-full rounded-md border border-[#505050] hover:bg-[#3c4151] bg-[#333945] focus:outline-none focus:border-transparent placeholder:text-[#717A8C] placeholder:text-base py-2.5 px-10 shadow-sm sm:text-sm"
-                                defaultValue={(() => {
-                                    switch (updateField) {
-                                        case 'twitter':
-                                            return twitter;
-                                  
-                                        case 'bio':
-                                            return bio;
-                                        case 'username':
-                                            return username;
-                                        case 'profilePicture':
-                                            return profilePicture;
-                                        case 'categories': // Populate the input with the current categories
-                                            return categories;
-                                        default:
-                                            return '';
-                                    }
-                                })()}
-                            />
-                            <div className="flex justify-end mt-4">
-                                <button
-                                    type="button"
-                                    onClick={handleCloseModal}
-                                    className="bg-gray-300 px-4 py-2 rounded mr-2"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                                >
-                                    Save
-                                </button>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-[#333945] p-8 rounded-xl w-96">
+            <h2 className="text-2xl font-semibold mb-4">Update {updateField}</h2>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleUpdate(e);
+                }}
+            >
+                <input
+                    type="text"
+                    name="updateInput"
+                    className="w-full rounded-md border border-[#505050] hover:bg-[#3c4151] bg-[#333945] focus:outline-none focus:border-transparent placeholder:text-[#717A8C] placeholder:text-base py-2.5 px-10 shadow-sm sm:text-sm"
+                    defaultValue={(() => {
+                        switch (updateField) {
+                            case 'twitter':
+                                return twitter;
+                            case 'bio':
+                                return bio;
+                            case 'username':
+                                return username;
+                            case 'profilePicture':
+                                return profilePicture;
+                            case 'categories':
+                                return categories;
+                            default:
+                                return '';
+                        }
+                    })()}
+                />
+                <div className="flex justify-end mt-4">
+                    <button
+                        type="button"
+                        onClick={handleCloseModal}
+                        className="bg-gray-300 px-4 py-2 rounded mr-2"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                        Save
+                    </button>
                             </div>
                         </form>
                     </div>
