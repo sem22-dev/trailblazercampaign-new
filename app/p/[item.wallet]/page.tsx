@@ -32,13 +32,14 @@ export default function UpdateProfile() {
         if (index !== -1) {
             const extractedValue = currentUrl.substring(index + 2);
             setValueAfterP(extractedValue);
-
+//buncc of useless logic and implementation
             if (extractedValue.length > 15) {
                 const firstFour = extractedValue.substring(0, 4);
                 const lastFive = extractedValue.substring(extractedValue.length - 5);
                 setFinalVersion(`${firstFour}...${lastFive}`);
             } else {
                 setFinalVersion(extractedValue);
+              
             }
         }
     }, []);
@@ -220,7 +221,9 @@ export default function UpdateProfile() {
                         className="rounded-full border mr-4"
                     />
                     <div>
-                        <h2 className="text-4xl font-bold my-4">{finalVersion}</h2>
+                    <h2 className="text-4xl font-bold my-4">
+  {valueAfterP.slice(0, 5) + "..." + valueAfterP.slice(-6)}
+</h2>
                         <p className="text-gray-300">{bio}</p>
                         <br></br>
                         <div className="mt-2">
