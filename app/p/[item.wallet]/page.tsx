@@ -50,6 +50,13 @@ export default function UpdateProfile() {
         }
     }, [valueAfterP]);
 
+    console.log(valueAfterP);
+    let first4 = valueAfterP.substring(0, 4);
+let last5 = valueAfterP.substring(valueAfterP.length - 5);
+
+let result = first4 + '...' + last5;
+
+console.log(result);
     // Fetch NFTs data from API
     async function fetchNFTsData(valueAfterP: string) {
         try {
@@ -222,7 +229,7 @@ export default function UpdateProfile() {
                     />
                     <div>
                     <h2 className="text-4xl font-bold my-4">
-  {valueAfterP}
+  {result}
 </h2>
                         <p className="text-gray-300">{bio}</p>
                         <br></br>
