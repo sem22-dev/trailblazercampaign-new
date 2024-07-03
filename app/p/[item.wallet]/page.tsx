@@ -28,21 +28,22 @@ export default function UpdateProfile() {
     useEffect(() => {
         const currentUrl = window.location.href;
         const index = currentUrl.indexOf('p/');
-
+    
         if (index !== -1) {
-            const extractedValue = currentUrl.substring(index + 2);
-            setValueAfterP(extractedValue);
-//buncc of useless logic and implementation
-            if (extractedValue.length > 15) {
-                const firstFour = extractedValue.substring(0, 4);
-                const lastFive = extractedValue.substring(extractedValue.length - 5);
+            const extractedValue = currentUrl.substring(index + 2); // Extract after 'p/'
+            const valueWithoutP = extractedValue.replace(/^p\//, ''); // Remove the 'p/' prefix if it exists
+            setValueAfterP(valueWithoutP);
+    
+            if (valueWithoutP.length > 15) {
+                const firstFour = valueWithoutP.substring(0, 4);
+                const lastFive = valueWithoutP.substring(valueWithoutP.length - 5);
                 setFinalVersion(`${firstFour}...${lastFive}`);
             } else {
-                setFinalVersion(extractedValue);
-              
+                setFinalVersion(valueWithoutP);
             }
         }
     }, []);
+    
 
     useEffect(() => {
         if (valueAfterP) {
