@@ -241,12 +241,6 @@ export default function UpdateProfile() {
                                 Update Profile Picture
                             </label>
                         </div>
-                        <button
-                            className="bg-[#333945] text-white px-4 py-2 rounded mt-2 cursor-pointer"
-                            onClick={() => handleOpenModal('username')}
-                        >
-                            {username || 'Update Username'}
-                        </button>
                         <br></br>
                         <button
                             className="bg-[#333945] text-white px-4 py-2 rounded mt-2 cursor-pointer"
