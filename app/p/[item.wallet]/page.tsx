@@ -222,7 +222,7 @@ export default function UpdateProfile() {
                     />
                     <div>
                     <h2 className="text-4xl font-bold my-4">
-  {valueAfterP.slice(0, 5) + "..." + valueAfterP.slice(-6)}
+  {valueAfterP}
 </h2>
                         <p className="text-gray-300">{bio}</p>
                         <br></br>
