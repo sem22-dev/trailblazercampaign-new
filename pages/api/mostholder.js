@@ -1,5 +1,4 @@
 import connection from '../../lib/db';
-//remove isomorphic fetch
 
 export default async (req, res) => {
     if (req.method !== 'GET') {
@@ -15,7 +14,6 @@ export default async (req, res) => {
             return res.json({ message: 'No records found in the collections table.' });
         }
 
-
         const enhancedResults = [];
 
         for (const item of results) {
@@ -24,22 +22,34 @@ export default async (req, res) => {
             const data = await response.json();
 
             if (data.status === "1" && data.result && data.result.totalSupply) {
+                const holdersApiUrl = `https://blockscoutapi.hekla.taiko.xyz/api?module=token&action=getTokenHolders&contractaddress=${item.address}&page=1&offset=10000`;
+                const holdersResponse = await fetch(holdersApiUrl);
+                const holdersData = await holdersResponse.json();
+
+                // Find the holder with the maximum value
+                let maxHolder = null;
+                if (holdersData.status === "1" && holdersData.result && holdersData.result.length > 0) {
+                    maxHolder = holdersData.result.reduce((max, holder) => {
+                        return (parseInt(holder.value) > parseInt(max.value)) ? holder : max;
+                    });
+                }
+// here  this endpoint is to fetch the top contract using the local db
                 const enhancedItem = {
                     address: item.address,
                     name: item.name,
                     type: item.type,
                     symbol: item.symbol,
-                    additionalInfo: data 
+                    additionalInfo: data,
+                    tokenHolder: maxHolder
                 };
                 enhancedResults.push(enhancedItem);
             }
         }
-
-    
+// sort to descending order and list out contract and top holders details
         enhancedResults.sort((a, b) => {
             const totalSupplyA = parseInt(a.additionalInfo.result.totalSupply);
             const totalSupplyB = parseInt(b.additionalInfo.result.totalSupply);
-            return totalSupplyB - totalSupplyA; 
+            return totalSupplyB - totalSupplyA;
         });
 
         res.json(enhancedResults);
