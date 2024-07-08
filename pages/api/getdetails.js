@@ -14,6 +14,7 @@ export default async (req, res) => {
             ? results.map((row, index) => ({
                 rank: index + 1,
                 wallet: row.address,
+                username: row.username, //username 
                 rankScore: index + 1,
                 nfts: row.totalmint,
                 labels: row.categories,
