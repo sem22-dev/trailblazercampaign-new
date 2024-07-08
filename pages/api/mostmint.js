@@ -1,5 +1,5 @@
 import connection from '../../lib/db';
-
+//based on the nft mint >>rank
 export default async (req, res) => {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method not allowed' });
