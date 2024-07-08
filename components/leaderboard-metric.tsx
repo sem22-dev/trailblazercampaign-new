@@ -1,4 +1,4 @@
-import { useState, useEffect, JSX, SVGProps } from "react";
+import { useState, useEffect, SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,45 +14,45 @@ export interface LeaderboardData {
   opensea: string;
   twitter: string;
   blockscan: string;
- profile?: {
+  profile?: {
     data?: string; // Assuming the base64 data is a string
   };
 }
 
 export default function LeaderboardMetrics() {
   const [data, setData] = useState<LeaderboardData[]>([]);
+
   useEffect(() => {
     fetch('/api/getdetails')
       .then(response => response.json())
       .then((data) => {
-        const modifiedData = data.map((item: { profile: { data: any; }; labels: string; }) => {
+        const modifiedData = data.map((item: LeaderboardData) => {
           if (item.profile && item.profile.data) {
- 
             const asciiValues = item.profile.data;
-            const buffer = Buffer.from(asciiValues);
-  
-            const decodedString = buffer.toString();
-  
+            const buffer = Buffer.from(asciiValues, 'base64'); 
+            const decodedString = buffer.toString('utf-8'); 
+
             console.log('Decoded String:', decodedString); 
-  
-         
+
+            return {
+              ...item,
+              profile: {
+                ...item.profile,
+                data: decodedString 
+              },
+              labels: typeof item.labels === 'string' 
+            };
           }
-          return {
-            ...item,
-            labels: typeof item.labels === 'string' ? item.labels.split(',') : item.labels
-          };
+          return item;
         });
         setData(modifiedData);
-        console.log(modifiedData); // Log modified data after processing
       })
       .catch(error => {
         console.error('Error fetching data:', error);
         // Handle errors if needed
       });
   }, []);
-  
-  
-  
+
   return (
     <main className="min-h-screen my-8">
       <div className="overflow-x-auto">
@@ -75,10 +75,15 @@ export default function LeaderboardMetrics() {
                 <td className="px-2 py-4 whitespace-nowrap text-[#717A8C] text-sm font-medium">{item.rank}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex items-center gap-4">
-                    <Image src={item.avatar} height={35} width={35} alt="avatar"/>
+                    {item.profile && item.profile.data && (
+                      <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
+                    )}
                     <Link href={`/p/${item.wallet}`}>{item.wallet}</Link>
                   </div>
                 </td>
+
+
+    
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <h1 className="border w-fit py-1 px-2 rounded-xl border-[#32D74B] text-[#32D74B] font-medium bg-[#274539]">
                     {item.rankScore}
