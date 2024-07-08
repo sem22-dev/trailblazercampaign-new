@@ -15,6 +15,7 @@ export default async (req, res) => {
                 rank: index + 1,
                 wallet: row.address,
                 rankScore: index + 1,
+                username: row.username, //get username
                 nfts: row.totalmint,
                 labels: row.categories,
                 activity: `https://mintpad-trailblazers.vercel.app/activity-example.svg`,
