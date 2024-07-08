@@ -36,8 +36,7 @@ const ProfileMetrics = () => {
         <button className="flex text-white z-50 items-center px-8 py-2 cursor-pointer button-gradient rounded-full">Most Mints</button>
         <button className="flex text-white z-50 items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full">Most Holders</button>
         <button className="flex text-white z-50 items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full">Most Transfers</button>
-        <button className="flex text-white z-50 items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full">Cars</button>
-        <button className="flex text-white z-50 items-center px-8 py-2 cursor-pointer border border-[#2E71F2] rounded-full">Art</button>
+
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4">
