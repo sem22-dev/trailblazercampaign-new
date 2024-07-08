@@ -1,5 +1,5 @@
 import connection from '../../lib/db';
-import fetch from 'isomorphic-fetch'; 
+//remove isomorphic fetch
 
 export default async (req, res) => {
     if (req.method !== 'GET') {
