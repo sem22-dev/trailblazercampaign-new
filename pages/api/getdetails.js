@@ -8,22 +8,29 @@ export default async (req, res) => {
     const limit = req.query.limit ? parseInt(req.query.limit) : 20;
 
     try {
-        const [results] = await connection.query(`SELECT * FROM taikocampaign ORDER BY totalmint DESC LIMIT ${limit}`);
+        const [results] = await connection.query(`
+            SELECT * FROM taikocampaign
+            ORDER BY totalmint DESC
+            LIMIT ${limit}
+        `);
 
         const response = results.length > 0
-            ? results.map((row, index) => ({
-                rank: index + 1,
-                wallet: row.address,
-                rankScore: index + 1,
-                username: row.username, //get username
-                nfts: row.totalmint,
-                labels: row.categories,
-                activity: `https://mintpad-trailblazers.vercel.app/activity-example.svg`,
-                avatar: `https://res.cloudinary.com/twdin/image/upload/v1719839745/avatar-example_mc0r1g.png`,
-                opensea: row.opensea,
-                twitter: row.twitter,
-                blockscan: row.Blockscan,
-            }))
+            ? results
+                .sort((a, b) => b.totalmint - a.totalmint)
+                .map((row, index) => ({
+                    rank: index + 1,
+                    wallet: row.address,
+                    username: row.username,
+                    rankScore: index + 1,
+                    nfts: row.totalmint,
+                    labels: row.categories,
+                    activity: `https://mintpad-trailblazers.vercel.app/activity-example.svg`,
+                    avatar: `https://res.cloudinary.com/twdin/image/upload/v1719839745/avatar-example_mc0r1g.png`,
+                    opensea: row.opensea,
+                    twitter: row.twitter,
+                    blockscan: row.Blockscan,
+                    profile: row.profilepic,
+                }))
             : { message: 'No records found in the taikocampaign table.' };
 
         res.json(response);
