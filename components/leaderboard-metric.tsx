@@ -50,7 +50,7 @@ export default function LeaderboardMetrics() {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        // Handle errors if needed
+  
       });
   }, []);
 
@@ -61,13 +61,12 @@ export default function LeaderboardMetrics() {
           <thead className="bg-[#252B36] text-[#717A8C] text-sm">
             <tr>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">#</th>
-              <th scope="col" className="px-2 py-3 text-left tracking-wider">Wallet</th>
+              <th scope="col" className="px-2 py-3 text-left tracking-wider">Username/Wallet</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Rank</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Labels</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">NFTs Minted</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Activity</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Contacts</th>
-              <th scope="col" className="px-2 py-3 text-left tracking-wider"></th>
             </tr>
           </thead>
           <tbody className="bg-[#252B36]">
@@ -79,12 +78,9 @@ export default function LeaderboardMetrics() {
                     {item.profile && item.profile.data && (
                       <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
                     )}
-                    <Link href={`/p/${item.wallet}`}>{item.wallet}</Link>
+                    <Link href={`/p/${item.wallet}`}>{item.username || item.wallet}</Link>
                   </div>
                 </td>
-
-
-    
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <h1 className="border w-fit py-1 px-2 rounded-xl border-[#32D74B] text-[#32D74B] font-medium bg-[#274539]">
                     {item.rankScore}
@@ -105,9 +101,9 @@ export default function LeaderboardMetrics() {
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">{item.nfts}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                <a href="https://www.mintpad.co" target="_blank" rel="noopener noreferrer">
-    <img src={item.activity} width={100} height={100} alt="activity" />
-  </a>
+                  <a href="https://www.mintpad.co" target="_blank" rel="noopener noreferrer">
+                    <img src={item.activity} width={100} height={100} alt="activity" />
+                  </a>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
                   <ContactIcons opensea={item.opensea} twitter={item.twitter} blockscan={item.blockscan} />
@@ -160,7 +156,7 @@ function ContactIcons({ opensea, twitter, blockscan }: ContactIconsProps) {
       )}
     </div>
   );
-
+}
 
 function SailboatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
@@ -180,8 +176,10 @@ function SailboatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) 
       <path d="M21 14 10 2 3 14h18Z" />
       <path d="M10 2v16" />
     </svg>
-  )
+  );
 }
+
+
 function Etherscan(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -220,5 +218,4 @@ function TwitterIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   
   )
-}
 }
