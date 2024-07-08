@@ -1,4 +1,4 @@
-import { useState, useEffect, JSX, SVGProps } from "react";
+import { useState, useEffect, SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,6 +7,7 @@ export interface LeaderboardData {
   rank: number;
   wallet: string;
   rankScore: number;
+  username: string;
   labels: string[];
   nfts: string;
   avatar: string;
@@ -14,6 +15,9 @@ export interface LeaderboardData {
   opensea: string;
   twitter: string;
   blockscan: string;
+  profile?: {
+    data?: string; // Assuming the base64 data is a string
+  };
 }
 
 export default function LeaderboardMetrics() {
@@ -23,14 +27,33 @@ export default function LeaderboardMetrics() {
     fetch('/api/getdetails')
       .then(response => response.json())
       .then((data) => {
-        const modifiedData = data.map((item: { labels: string; }) => ({
-          ...item,
-          labels: typeof item.labels === 'string' ? item.labels.split(',') : item.labels
-        }));
+        const modifiedData = data.map((item: LeaderboardData) => {
+          if (item.profile && item.profile.data) {
+            const asciiValues = item.profile.data;
+            const buffer = Buffer.from(asciiValues, 'base64'); 
+            const decodedString = buffer.toString('utf-8'); 
+
+            console.log('Decoded String:', decodedString); 
+
+            return {
+              ...item,
+              profile: {
+                ...item.profile,
+                data: decodedString 
+              },
+              labels: typeof item.labels === 'string' 
+            };
+          }
+          return item;
+        });
         setData(modifiedData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+  
       });
   }, []);
-  
+
   return (
     <main className="min-h-screen my-8">
       <div className="overflow-x-auto">
@@ -38,13 +61,12 @@ export default function LeaderboardMetrics() {
           <thead className="bg-[#252B36] text-[#717A8C] text-sm">
             <tr>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">#</th>
-              <th scope="col" className="px-2 py-3 text-left tracking-wider">Wallet</th>
+              <th scope="col" className="px-2 py-3 text-left tracking-wider">Username/Wallet</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Rank</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Labels</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">NFTs Minted</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Activity</th>
               <th scope="col" className="px-2 py-3 text-left tracking-wider">Contacts</th>
-              <th scope="col" className="px-2 py-3 text-left tracking-wider"></th>
             </tr>
           </thead>
           <tbody className="bg-[#252B36]">
@@ -53,8 +75,10 @@ export default function LeaderboardMetrics() {
                 <td className="px-2 py-4 whitespace-nowrap text-[#717A8C] text-sm font-medium">{item.rank}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex items-center gap-4">
-                    <Image src={item.avatar} height={35} width={35} alt="avatar"/>
-                    <Link href={`/p/${item.wallet}`}>{item.wallet}</Link>
+                    {item.profile && item.profile.data && (
+                      <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
+                    )}
+                    <Link href={`/p/${item.wallet}`}>{item.username || item.wallet}</Link>
                   </div>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
@@ -77,7 +101,9 @@ export default function LeaderboardMetrics() {
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">{item.nfts}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                  <Image src={item.activity} width={100} height={100} alt="activity"/>
+                  <a href="https://www.mintpad.co" target="_blank" rel="noopener noreferrer">
+                    <img src={item.activity} width={100} height={100} alt="activity" />
+                  </a>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
                   <ContactIcons opensea={item.opensea} twitter={item.twitter} blockscan={item.blockscan} />
@@ -130,7 +156,7 @@ function ContactIcons({ opensea, twitter, blockscan }: ContactIconsProps) {
       )}
     </div>
   );
-
+}
 
 function SailboatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
@@ -150,8 +176,10 @@ function SailboatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) 
       <path d="M21 14 10 2 3 14h18Z" />
       <path d="M10 2v16" />
     </svg>
-  )
+  );
 }
+
+
 function Etherscan(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -190,5 +218,4 @@ function TwitterIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   
   )
-}
 }
