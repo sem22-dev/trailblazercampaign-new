@@ -7,6 +7,7 @@ export interface LeaderboardData {
   rank: number;
   wallet: string;
   rankScore: number;
+  username: string;
   labels: string[];
   nfts: string;
   avatar: string;
