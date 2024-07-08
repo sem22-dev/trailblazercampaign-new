@@ -14,22 +14,44 @@ export interface LeaderboardData {
   opensea: string;
   twitter: string;
   blockscan: string;
+ profile?: {
+    data?: string; // Assuming the base64 data is a string
+  };
 }
 
 export default function LeaderboardMetrics() {
   const [data, setData] = useState<LeaderboardData[]>([]);
-
   useEffect(() => {
     fetch('/api/getdetails')
       .then(response => response.json())
       .then((data) => {
-        const modifiedData = data.map((item: { labels: string; }) => ({
-          ...item,
-          labels: typeof item.labels === 'string' ? item.labels.split(',') : item.labels
-        }));
+        const modifiedData = data.map((item: { profile: { data: any; }; labels: string; }) => {
+          if (item.profile && item.profile.data) {
+ 
+            const asciiValues = item.profile.data;
+            const buffer = Buffer.from(asciiValues);
+  
+            const decodedString = buffer.toString();
+  
+            console.log('Decoded String:', decodedString); 
+  
+         
+          }
+          return {
+            ...item,
+            labels: typeof item.labels === 'string' ? item.labels.split(',') : item.labels
+          };
+        });
         setData(modifiedData);
+        console.log(modifiedData); // Log modified data after processing
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // Handle errors if needed
       });
   }, []);
+  
+  
   
   return (
     <main className="min-h-screen my-8">
@@ -77,7 +99,9 @@ export default function LeaderboardMetrics() {
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">{item.nfts}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                  <Image src={item.activity} width={100} height={100} alt="activity"/>
+                <a href="https://www.mintpad.co" target="_blank" rel="noopener noreferrer">
+    <img src={item.activity} width={100} height={100} alt="activity" />
+  </a>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
                   <ContactIcons opensea={item.opensea} twitter={item.twitter} blockscan={item.blockscan} />
