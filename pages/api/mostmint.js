@@ -10,18 +10,27 @@ export default async (req, res) => {
     try {
         const [results] = await connection.query(`
             SELECT * FROM taikocampaign
-            ORDER BY CAST(totalmint AS UNSIGNED) DESC
+            ORDER BY totalmint DESC
             LIMIT ${limit}
         `);
 
         const response = results.length > 0
-            ? results.map((row, index) => ({
-                rank: index + 1,
-                username: row.username || "Anonymous", // Handle null or empty usernames
-                rankScore: row.totalmint,
-                nfts: row.totalmint,
-                profile: row.profilepic && row.profilepic.length ? row.profilepic.toString('base64') : null, // Handle Buffer profile pic
-            }))
+            ? results
+                .sort((a, b) => b.totalmint - a.totalmint)
+                .map((row, index) => ({
+                    rank: index + 1,
+                    wallet: row.address,
+                    username: row.username,
+                    rankScore: index + 1,
+                    nfts: row.totalmint,
+                    labels: row.categories,
+                    activity: `https://mintpad-trailblazers.vercel.app/activity-example.svg`,
+                    avatar: `https://res.cloudinary.com/twdin/image/upload/v1719839745/avatar-example_mc0r1g.png`,
+                    opensea: row.opensea,
+                    twitter: row.twitter,
+                    blockscan: row.Blockscan,
+                    profile: row.profilepic,
+                }))
             : { message: 'No records found in the taikocampaign table.' };
 
         res.json(response);
