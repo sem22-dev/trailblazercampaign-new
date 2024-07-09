@@ -43,9 +43,7 @@ const ProfileMetrics = () => {
         case 'mostTransfers':
           endpoint = 'mosttransfers';
           break;
-        default:
-          endpoint = 'mostmint';
-          break;
+     
       }
 
       const response = await fetch(`http://localhost:3000/api/${endpoint}`);
@@ -120,7 +118,7 @@ const ProfileMetrics = () => {
                       className="w-40 lg:w-56 h-40 lg:h-56 rounded-full"
                     />
                     <Image src={'/one.svg'} alt="Profile" width={1000} height={1000} className="w-40 h-40 absolute -bottom-8 right-0" />
-                    <div className="text-center text-4xl font-medium">{profile.username}</div>
+                    <div className="text-center text-4xl font-medium">{profile.username || "degen"}</div>
                     <div className="text-center text-2xl"><span className='text-[#636363]'>Total mints:</span> {profile.nfts}</div>
                   </div>
                 ))}
@@ -130,26 +128,26 @@ const ProfileMetrics = () => {
 
           {currentCategory === 'mostHolders' && (
             <div className="mt-8">
-              <div className="grid grid-cols-1 gap-4">
+              <div className="flex flex-col gap-4">
                 {profiles.map((profile, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between py-4 px-6 bg-gray-800 rounded-lg shadow-lg"
+                    className="flex items-center justify-between py-4 px-6 bg-gray-800 rounded-md shadow-md"
                   >
                     <div className="flex items-center">
                       <div className="text-2xl font-bold mr-4">{profile.rank}</div>
                       <div className="flex flex-col">
-                        <div className="text-lg font-semibold">Contract Address:</div>
-                        <div className="text-gray-300">{profile.address}</div>
+                        <div className="text-lg">Contract Address:</div>
+                        <div className="text-gray-400">{profile.address}</div>
                       </div>
                     </div>
-                    <div className="flex flex-col text-right">
-                      <div className="text-lg font-semibold">Holder Address:</div>
-                      <div className="text-gray-300">{profile.tokenHolder?.address}</div>
-                      <div className="text-lg font-semibold mt-2">Collection Name:</div>
-                      <div className="text-gray-300">{profile.name}</div>
-                      <div className="text-lg font-semibold mt-2">Holder Amount:</div>
-                      <div className="text-gray-300">{profile.tokenHolder?.value}</div>
+                    <div className="flex flex-col">
+                      <div className="text-lg">Holder Address:</div>
+                      <div className="text-gray-400">{profile.tokenHolder?.address}</div>
+                      <div className="text-lg">Collection Name:</div>
+                      <div className="text-gray-400">{profile.name}</div>
+                      <div className="text-lg">Holder Amount:</div>
+                      <div className="text-gray-400">{profile.tokenHolder?.value}</div>
                     </div>
                   </div>
                 ))}
