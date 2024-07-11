@@ -46,7 +46,7 @@ const ProfileMetrics = () => {
      
       }
 
-      const response = await fetch(`http://localhost:3000/api/${endpoint}`);
+      const response = await fetch(`https://raw.githubusercontent.com/chimmykk/trailblazercampaign/staging/test2.json`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
