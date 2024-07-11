@@ -24,7 +24,7 @@ export default function LeaderboardMetrics() {
   const [data, setData] = useState<LeaderboardData[]>([]);
 
   useEffect(() => {
-    fetch('/api/getdetails')
+    fetch('https://raw.githubusercontent.com/chimmykk/trailblazercampaign/staging/test.json')
       .then(response => response.json())
       .then((data) => {
         const modifiedData = data.map((item: LeaderboardData) => {
