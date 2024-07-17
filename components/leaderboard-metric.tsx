@@ -8,7 +8,7 @@ export interface LeaderboardData {
   wallet: string;
   rankScore: number;
   username: string;
-  labels: string[];
+  labels: string[] | string; // Updated type to handle both array and string
   nfts: string;
   avatar: string;
   activity: string;
@@ -41,16 +41,19 @@ export default function LeaderboardMetrics() {
                 ...item.profile,
                 data: decodedString 
               },
-              labels: typeof item.labels === 'string' 
+              labels: Array.isArray(item.labels) ? item.labels : [item.labels] // Convert string labels to an array
             };
           }
-          return item;
+          return {
+            ...item,
+            labels: Array.isArray(item.labels) ? item.labels : [item.labels] // Convert string labels to an array
+          };
         });
         setData(modifiedData);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-  
+        // Handle errors if needed
       });
   }, []);
 
@@ -88,22 +91,22 @@ export default function LeaderboardMetrics() {
                 </td>
                 <td className="px-2 py-4 w-[300px] text-sm font-medium">
                   <h1>
-                    {Array.isArray(item.labels) ? (
-                      item.labels.map((label, idx) => (
-                        <span key={idx}>
-                          <span className={`text-xl font-bold mr-1 ${getColor(label)}`}>·</span>{label}
-                        </span>
-                      ))
-                    ) : (
-                      <span>{item.labels || "No labels available"}</span>
-                    )}
+                    {(Array.isArray(item.labels) ? item.labels : [item.labels]).map((label, idx) => (
+                      <span key={idx}>
+                        <span className={`text-xl font-bold mr-1 ${getColor(label)}`}>·</span>{label}
+                      </span>
+                    ))}
                   </h1>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">{item.nfts}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                  <a href="https://www.mintpad.co" target="_blank" rel="noopener noreferrer">
-                    <img src={item.activity} width={100} height={100} alt="activity" />
-                  </a>
+                  {item.activity ? (
+                    <a href={`${item.activity}`} target="_blank" rel="noopener noreferrer">
+                      <span>Click here</span>
+                    </a>
+                  ) : (
+                    <span>Not Available</span>
+                  )}
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
                   <ContactIcons opensea={item.opensea} twitter={item.twitter} blockscan={item.blockscan} />
@@ -157,6 +160,7 @@ function ContactIcons({ opensea, twitter, blockscan }: ContactIconsProps) {
     </div>
   );
 }
+
 
 function SailboatIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
