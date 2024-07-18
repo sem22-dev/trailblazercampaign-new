@@ -78,14 +78,16 @@ export default function Home() {
                   </div>
                   <h1 className=" text-3xl">Collect your Mintpad Quest NFT <br /> to start Taiko Trailblazer Points!</h1>
                   <p className="">Free claim to Unique PFP Collection <br /> Access to Taiko/Mintpad Mints <br /> Priority Mintpad Support</p>
-                  <div className="flex gap-3 text-white  items-center">
-                    <button
-                        className="button-gradient px-16 py-4 text-2xl rounded-full font-bold"
-
-                      >
-                        MINT NOW
-                      </button>
-                  </div>
+                          <div className="flex gap-3 text-white items-center">
+  <a
+    href="https://on.mintpad.co/mintpad-taiko-quest"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="button-gradient px-16 py-4 text-2xl rounded-full font-bold"
+  >
+    MINT NOW
+  </a>
+</div>
                       <div className=" flex gap-4 items-center">
                         < Image src={'/minted-pfp.svg'} width={130} height={1000} alt="background" className="" />
                         <p className=" text-gray-400">14k minted</p>
