@@ -51,8 +51,7 @@ const ProfileMetrics = () => {
         <button onClick={() => handleCategoryChange('mostMints')} className={`flex text-white z-50 items-center px-8 py-3 cursor-pointer ${currentCategory === 'mostMints' ? 'button-gradient' : 'border border-[#2E71F2]'} rounded-full`}>Most Mints</button>
         <button onClick={() => handleCategoryChange('mostHolders')} className={`flex text-white z-50 items-center px-8 py-3 cursor-pointer ${currentCategory === 'mostHolders' ? 'button-gradient' : 'border border-[#2E71F2]'} rounded-full`}>Most Holders</button>
         <button onClick={() => handleCategoryChange('mostTransfers')} className={`flex text-white z-50 items-center px-8 py-3 cursor-pointer ${currentCategory === 'mostTransfers' ? 'button-gradient' : 'border border-[#2E71F2]'} rounded-full`}>Most Transfers</button>
-        <button onClick={() => handleCategoryChange('cars')} className={`flex text-white z-50 items-center px-8 py-3 cursor-pointer ${currentCategory === 'cars' ? 'button-gradient' : 'border border-[#2E71F2]'} rounded-full`}>Cars</button>
-        <button onClick={() => handleCategoryChange('arts')} className={`flex text-white z-50 items-center px-8 py-3 cursor-pointer ${currentCategory === 'arts' ? 'button-gradient' : 'border border-[#2E71F2]'} rounded-full`}>Arts</button>
+
       </div>
 
       <div>
