@@ -100,12 +100,12 @@ export default function Home() {
               </div>
               
             </div>
-            {/* <TopSellers /> */}
+            { <TopSellers />}
             
            <div id="leaderboard" >
             <ProfileMetrics />
            </div>
-            {/* <TopCreators /> */}
+            { <TopCreators />}
 
     </main>
   );
