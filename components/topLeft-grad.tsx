@@ -8,7 +8,7 @@ export default function TopLeft(){
 
     return(
         <div 
-            className={` ${pathname == '/leaderboard' || pathname == '/p' ? 'hidden' : 'block'} side-grad`}
+            className={` ${pathname == '/leaderboard' || '/p' ? 'hidden' : 'block'} side-grad`}
             >
                 
             </div>
