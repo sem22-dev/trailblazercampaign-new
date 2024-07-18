@@ -36,7 +36,7 @@ export default function Navbar2() {
   const navItems = [
     { name: 'GET STARTED', href: '/' },
     { name: 'LEADEROARD', href: '/leaderboard' },
-    { name: 'CREATE', href: '/' },
+    { name: 'CREATE', href: 'https://app.mintpad.co/login' },
     { name: 'FAQ', href: '/' },
   ];
 
@@ -53,11 +53,12 @@ export default function Navbar2() {
             ))}
         </div>
         <div className="flex gap-3 text-white z-50  items-center">
-               <button
-                className=' px-8 py-2 cursor-pointer button-gradient rounded-full'
-                >
-                  SIGN UP
-                </button>
+        <button className='px-8 py-2 cursor-pointer button-gradient rounded-full'>
+  <a href='https://app.mintpad.co/register' target='_blank' rel='noopener noreferrer'>
+    SIGN UP
+  </a>
+</button>
+
         </div>
       </nav>
 
