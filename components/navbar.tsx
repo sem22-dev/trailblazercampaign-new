@@ -34,26 +34,11 @@ export default function Navbar2() {
   }, []);
 
   const navItems = [
-    { name: 'GET STARTED', href: '#getstarted' },
-    { name: 'LEADEROARD', href: '#leaderboard' },
+    { name: 'GET STARTED', href: '/' },
+    { name: 'LEADEROARD', href: '/leaderboard' },
     { name: 'CREATE', href: '/' },
     { name: 'FAQ', href: '/' },
   ];
-
-  const handleScrollToSection = (event: any, href: string) => {
-    // Check if the href is a valid CSS selector (internal section link)
-    if (href.startsWith('#')) {
-      event.preventDefault();
-      const section = document.querySelector(href);
-      if (section) {
-        const top = section.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
 
   return (
     <div className={` `}>
@@ -64,7 +49,7 @@ export default function Navbar2() {
       </Link>
         <div className={`items-center p-2 z-50 rounded-full text-white text-sm space-x-10 hidden md:flex md:space-x-10 lg:space-x-20`}> 
             {navItems.map((item,index) => (
-              <Link key={index} href={item.href} onClick={(e) => handleScrollToSection(e, item.href)} className=' cursor-pointer'>{item.name}</Link>
+              <Link href={item.href} className=' cursor-pointer'>{item.name}</Link>
             ))}
         </div>
         <div className="flex gap-3 text-white z-50  items-center">
@@ -97,7 +82,7 @@ export default function Navbar2() {
           </button>
           <div className="bg-white rounded-lg p-4 text-black text-[20px] w-full mx-4 mt-14 z-10 h-fit">
             {navItems.map((item, index) => (
-              <Link key={index} className="block py-4 border-b text-sm" onClick={() => {handleScrollToSection(event, item.href); setShowMenu(false)}} href={item.href}>
+              <Link key={index} className="block py-4 border-b text-sm" onClick={() => setShowMenu(false)} href={item.href}>
                 {item.name}
               </Link>
             ))}
