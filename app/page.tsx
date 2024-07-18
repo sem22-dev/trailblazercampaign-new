@@ -99,7 +99,7 @@ export default function Home() {
 
                 {/* right */}
               <div>
-                < Image src={'/taiko-logo.svg'} width={508} height={508} alt="background" className="hidden lg:block" />
+                < Image src={'/mintpadtaiko.gif'} width={508} height={508} alt="background" className="hidden lg:block" />
                 < Image src={'/taiko-logo.svg'} width={400} height={508} alt="background" className="block lg:hidden" />
               </div>
             </div>
