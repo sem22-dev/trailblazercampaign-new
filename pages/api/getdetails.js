@@ -24,12 +24,13 @@ export default async (req, res) => {
                     rankScore: index + 1,
                     nfts: row.totalmint,
                     labels: row.categories,
-                    activity: `https://mintpad-trailblazers.vercel.app/activity-example.svg`,
+
                     avatar: `https://res.cloudinary.com/twdin/image/upload/v1719839745/avatar-example_mc0r1g.png`,
                     opensea: row.opensea,
                     twitter: row.twitter,
                     blockscan: row.Blockscan,
                     profile: row.profilepic,
+                    activity: row.latestactivity,
                 }))
             : { message: 'No records found in the taikocampaign table.' };
 
