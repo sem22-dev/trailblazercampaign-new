@@ -1,6 +1,6 @@
 import ProfileMetrics from "@/components/profileMetrics";
-import TopCreators from "../components/top-creators";
-import TopSellers from "../components/top-sellers";
+import TopCreators from "@/components/top-creators";
+import TopSellers from "@/components/top-sellers";
 import Image from "next/image";
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
             </div>
         </div>
 
-          <div className=" border z-50 -mt-[400px] mx-12 glass p-8 flex flex-col items-center justify-center">
+          <div id="getstarted" className=" border z-50 -mt-[400px] mx-12 glass p-8 flex flex-col items-center justify-center">
             <div className="flex flex-col gap-2 items-center mb-12">
               <h1 
                 className="text-[#B25ACB] text-3xl font-semibold"
@@ -67,11 +67,6 @@ export default function Home() {
               <Image src={'/mintpad-line.svg'} width={2000} height={1000} alt="background" className="" />
             </div>
 
-
-            {/* <div className=" hidden lg:block z-20 left-0 lg:-bottom-[1400px] xl:-bottom-[1500px] w-screen  ">
-              <Image src={'/doge-pfps.svg'} width={2000} height={1000} alt="background" className="" />
-            </div> */}
-
             <div 
                 className="flex justify-between flex-col relative gap-12 lg:flex-row bg-Img py-12 lg:pt-96 lg:pb-48 px-12 xl:px-40 "
                 
@@ -83,17 +78,14 @@ export default function Home() {
                   </div>
                   <h1 className=" text-3xl">Collect your Mintpad Quest NFT <br /> to start Taiko Trailblazer Points!</h1>
                   <p className="">Free claim to Unique PFP Collection <br /> Access to Taiko/Mintpad Mints <br /> Priority Mintpad Support</p>
-                  <div className="flex gap-3 text-white items-center">
-                  <a
-                    href="https://on.mintpad.co/mintpad-taiko-quest"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="button-gradient px-16 py-4 text-2xl rounded-full font-bold"
-                  >
-                    MINT NOW
-                  </a>
-                </div>
+                  <div className="flex gap-3 text-white  items-center">
+                    <button
+                        className="button-gradient px-16 py-4 text-2xl rounded-full font-bold"
 
+                      >
+                        MINT NOW
+                      </button>
+                  </div>
                       <div className=" flex gap-4 items-center">
                         < Image src={'/minted-pfp.svg'} width={130} height={1000} alt="background" className="" />
                         <p className=" text-gray-400">14k minted</p>
@@ -102,14 +94,16 @@ export default function Home() {
 
                 {/* right */}
               <div>
-                < Image src={'/mintpadtaiko.gif'} width={508} height={508} alt="background" className="hidden lg:block" />
-                < Image src={'/taiko-logo.svg'} width={400} height={508} alt="background" className="block lg:hidden" />
+                < Image src={'/mintpadtaiko.gif'} width={550} height={508} alt="background" className="" />
               </div>
+              
             </div>
-
-            <TopSellers />
+            {/* <TopSellers /> */}
+            
+           <div id="leaderboard" >
             <ProfileMetrics />
-            <TopCreators />
+           </div>
+            {/* <TopCreators /> */}
 
     </main>
   );
