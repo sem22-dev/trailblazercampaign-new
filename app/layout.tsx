@@ -6,6 +6,7 @@ import Image from "next/image";
 import Eclipse from "@/components/eclipse";
 import TopLeft from "@/components/topLeft-grad";
 import Planets from "@/components/planet-icons";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <div className="content">
             <Navbar2 />
             {children}
+            <Footer />
           </div>
         </div>
       </body>
