@@ -134,7 +134,7 @@ export default function LeaderboardMetrics({ selectedFilter, searchTerm }: { sel
                   <div>
                     {item.twitter ? (
                       <Link href={`https://twitter.com/${item.twitter}`} target="_blank" rel="noopener noreferrer">
-                        Twitter
+                        <TwitterIcon />
                       </Link>
                     ) : (
                       <span>Not Available</span>
