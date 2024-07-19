@@ -36,7 +36,7 @@ export default function Navbar2() {
   const navItems = [
     { name: 'GET STARTED', href: '#getstarted' },
     { name: 'LEADEROARD', href: '#leaderboard' },
-    {name: 'RANKING', href: '/leaderboar'},
+    {name: 'RANKING', href: '/leaderboard'},
     { name: 'CREATE', href: 'https://app.mintpad.co/login' },
     { name: 'FAQ', href: '/' },
   ];
