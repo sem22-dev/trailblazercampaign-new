@@ -4,6 +4,8 @@ import MintpadLine from "@/components/mintpad-line";
 import ProfileMetrics from "@/components/profileMetrics";
 import RocketLaunch from "@/components/rocket-launch";
 import Image from "next/image";
+import TopCreators from "@/components/top-creators";
+import TopSellers from "@/components/top-sellers";
 
 export default function Home() {
   return (
@@ -30,10 +32,11 @@ export default function Home() {
 
           <MintpadLine />
           <MintNow />
-            
+            <TopSellers></TopSellers>
            <div id="leaderboard" >
             <ProfileMetrics />
            </div>
+           <TopCreators></TopCreators>
 
     </main>
   );
