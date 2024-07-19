@@ -7,29 +7,26 @@ import LeaderboardMetrics from "@/components/leaderboard-metric";
 export default function Leaderboard() {
   return (
     <main className="bg-[#252B36] z-50 px-2 sm:px-6 lg:px-12 py-12">
-      <div className=" flex items-center justify-between">
-            <div>
-                <div className="flex items-center gap-4">
-                    <Search />
-                    <Filter />
-                    <Columns />
-                </div>
-            </div>
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="flex items-center gap-4">
+            <Search />
+            <Filter />
+            <Columns />
+          </div>
+        </div>
 
-            <div className=" hidden lg:flex items-center gap-12">
-                <div className=" flex items-center gap-2 cursor-pointer">
-                    <Plus color="#A2A8B4"/>
-                    <h1>Add data</h1>
-                </div>
-                <div className=" flex items-center gap-2 cursor-pointer">
-                    <Upload color="#A2A8B4"/>
-                    <h1>Export</h1>
-                </div>
-            </div>
+        <div className="hidden lg:flex items-center gap-12">
+     
+          <div className="flex items-center gap-2 cursor-pointer">
+            <Upload color="#A2A8B4"/>
+            <h1>Export</h1>
+          </div>
+        </div>
       </div>
-    {/* metrics */}
+      {/* metrics */}
       <div>
-            <LeaderboardMetrics />
+        <LeaderboardMetrics />
       </div>
     </main>
   );
@@ -37,7 +34,7 @@ export default function Leaderboard() {
 
 function Search() {
   return (
-    <div className="relative w-fit ">
+    <div className="relative w-fit">
       <label htmlFor="Search" className="sr-only">
         Search
       </label>
@@ -84,7 +81,7 @@ function Filter() {
         onClick={toggleDropdown}
       >
         <ListFilter className="h-5 w-5 text-[#717A8C]" />
-        <span className="text-[#fff] ml-2">Filter</span>
+        <span className="text-[#fff] ml-20">Filter</span>
         <span
           className={`ml-1 transition-transform duration-200 ${
             isOpen ? "rotate-180" : "rotate-0"
@@ -98,21 +95,32 @@ function Filter() {
         </span>
       </div>
       {isOpen && (
-        <div className="absolute mt-2 bg-[#333945] text-white rounded-md shadow-lg w-full py-2">
-          <ul>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Top Minter
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-           Top Collection
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-             Top 10
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-      Top 20
-            </li>
-          </ul>
+        <div className="absolute mt-2 bg-[#333945] text-white rounded-md shadow-lg w-full py-2 px-4 max-h-60 overflow-y-auto">
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Creators</h3>
+            <ul className="space-y-2">
+              <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+                Top ERC-721 Collection by Unique Transactions
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+                Top ERC-1155 Collections by Unique Transactions
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+                Top Creator Overall with most Unique Transactions
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+                Top Collection by Unique Holders
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-2">Collectors</h3>
+            <ul className="space-y-2">
+              <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+                Top Collectors with most Unique Transactions
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </div>
@@ -148,18 +156,12 @@ function Columns() {
       </div>
       {isOpen && (
         <div className="absolute mt-2 bg-[#333945] text-white rounded-md shadow-lg w-full py-2">
-          <ul>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Option 1
+          <ul className="space-y-2">
+            <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+              Artist
             </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Option 2
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Option 3
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
-              Option 4
+            <li className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
+              Collector
             </li>
           </ul>
         </div>
