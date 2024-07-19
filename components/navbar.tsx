@@ -36,7 +36,8 @@ export default function Navbar2() {
   const navItems = [
     { name: 'GET STARTED', href: '#getstarted' },
     { name: 'LEADEROARD', href: '#leaderboard' },
-    { name: 'CREATE', href: '/' },
+    {name: 'RANKING', href: '/leaderboard'},
+    { name: 'CREATE', href: 'https://app.mintpad.co/login' },
     { name: 'FAQ', href: '/' },
   ];
 
@@ -67,12 +68,12 @@ export default function Navbar2() {
               <Link key={index} href={item.href} onClick={(e) => handleScrollToSection(e, item.href)} className=' cursor-pointer'>{item.name}</Link>
             ))}
         </div>
-        <div className="flex gap-3 text-white z-50  items-center">
-               <button
-                className=' px-8 py-2 cursor-pointer button-gradient rounded-full'
-                >
-                  SIGN UP
-                </button>
+        <div className="flex gap-3 text-white z-50 items-center">
+          <button className='px-8 py-2 cursor-pointer button-gradient rounded-full'>
+            <Link href='https://app.mintpad.co/register' target='_blank' rel='noopener noreferrer'>
+              SIGN UP
+            </Link>
+          </button>
         </div>
       </nav>
 
