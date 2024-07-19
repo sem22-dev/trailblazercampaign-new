@@ -3,10 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar2 from "@/components/navbar";
 import Image from "next/image";
-import Eclipse from "@/components/eclipse";
-import TopLeft from "@/components/topLeft-grad";
-import Planets from "@/components/planet-icons";
-import Footer from "@/components/footer";
+import Eclipse from "@/components/graphics/eclipse";
+import TopLeft from "@/components/graphics/topLeft-grad";
+import Planets from "@/components/graphics/planet-icons";
+import Footer from "@/components/sections/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
