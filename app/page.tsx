@@ -1,6 +1,8 @@
+import GetStarted from "@/components/sections/getStarted";
+import MintNow from "@/components/sections/mint-now";
+import MintpadLine from "@/components/mintpad-line";
 import ProfileMetrics from "@/components/profileMetrics";
-import TopCreators from "@/components/top-creators";
-import TopSellers from "@/components/top-sellers";
+import RocketLaunch from "@/components/rocket-launch";
 import Image from "next/image";
 
 export default function Home() {
@@ -12,100 +14,26 @@ export default function Home() {
           <div className="absolute bottom-1 z-10 ">
           <Image src={'/blazers-flex.png'} width={1500} height={1500} alt="background" />
           </div>
-          {/* <div className="absolute -bottom-72 z-10">
-          <Image src={'/mid-gradient.png'} width={1000} height={1500} alt="background" />
-          </div> */}
-          <div className="absolute z-10 -bottom-1 w-full object-cover">
-          <Image src={'/galaxy.png'} width={6000} height={5000} alt="background" className=" object-fill" />
+          <div className="absolute top-40  z-10  h-full w-full object-cover">
+            <Image src={'/galaxy.svg'} width={2000} height={1000} alt="background" className="h-ful; w-full object-fill" />
           </div>
           </div>
         </div>
 
-        <div className=" -mt-16 flex justify-center items-end relative">
-            <div className="mb-80 ">
-              < Image src={'/cloud.svg'} width={500} height={1000} alt="background" className="" />
-            </div>
-            <div>
-              < Image src={'/rocket.svg'} width={400} height={500} alt="background" className="" />
-            </div>
-            <div className="mb-80  ">
-              < Image src={'/right-cloud.svg'} width={500} height={1000} alt="background" className="" />
-            </div>
+        <div className="z-10">
+          <RocketLaunch />
         </div>
 
-          <div id="getstarted" className=" border z-50 -mt-[400px] mx-12 glass p-8 flex flex-col items-center justify-center">
-            <div className="flex flex-col gap-2 items-center mb-12">
-              <h1 
-                className="text-[#B25ACB] text-3xl font-semibold"
-              >
-                How it works
-              </h1>
-              <h1 className="text-xl">Create.Mint.Earn.</h1>
-            </div>
-            <div className="flex">
-              <div className=" w-72 flex flex-col gap-2 items-center text-center justify-center">
-                < Image src={'/one.svg'} width={70} height={1000} alt="background" className=" -mb-12" />
-                <h1 className="text-lg font-semibold">Setup Your Account</h1>
-                <p className=" text-sm text-[#A3A3A3] leading-6">Set up your Metamask wallet. Connect it to Mintpad by clicking the Sign Up icon in the top right corner</p>
-              </div>
-              < Image src={'/arrow.svg'} width={70} height={1000} alt="background" className=" mx-12" />
-              <div className=" w-72 flex flex-col gap-2 items-center text-center justify-center">
-                < Image src={'/two.svg'} width={100} height={1000} alt="background" className=" -mb-4" />
-                <h1 className="text-lg font-semibold">Create NFTs/Collectibles</h1>
-                <p className=" text-sm text-[#A3A3A3] leading-6">Upload your work and setup your collection. Make 1155 or 721 collectibles and make them public for others to mint.</p>
-              </div>
-              < Image src={'/arrow.svg'} width={70} height={1000} alt="background" className=" mx-12" />
-              <div className=" w-72 flex flex-col gap-2 items-center text-center justify-center">
-                < Image src={'/three.svg'} width={100} height={1000} alt="background" className=" -mb-10" />
-                <h1 className="text-lg font-semibold">Mint</h1>
-                <p className=" text-sm text-[#A3A3A3] leading-6">Start minting some NFTs you love. Whether is your own NFT you made, your friends, or one you just think deserves a mint.</p>
-              </div>
-            </div>
+          <div  id="getstarted" >
+            <GetStarted />
           </div>
 
-            <div className=" hidden lg:block absolute z-50 left-0 lg:-bottom-[1400px] xl:-bottom-[1540px] w-screen  ">
-              <Image src={'/mintpad-line.svg'} width={2000} height={1000} alt="background" className="" />
-            </div>
-
-            <div 
-                className="flex justify-between flex-col relative gap-12 lg:flex-row bg-Img py-12 lg:pt-96 lg:pb-48 px-12 xl:px-40 "
-                
-            >
-                <div className=" flex z-50 flex-col gap-8">
-                  <div>
-                    <h1 className=" text-[#EC25A1] text-3xl font-bold">GET YOUR</h1>
-                    <h1 className="text-[#E176FF] text-6xl font-bold">MINT PASS!</h1>
-                  </div>
-                  <h1 className=" text-3xl">Collect your Mintpad Quest NFT <br /> to start Taiko Trailblazer Points!</h1>
-                  <p className="">Free claim to Unique PFP Collection <br /> Access to Taiko/Mintpad Mints <br /> Priority Mintpad Support</p>
-                          <div className="flex gap-3 text-white items-center">
-  <a
-    href="https://on.mintpad.co/mintpad-taiko-quest"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="button-gradient px-16 py-4 text-2xl rounded-full font-bold"
-  >
-    MINT NOW
-  </a>
-</div>
-                      <div className=" flex gap-4 items-center">
-                        < Image src={'/minted-pfp.svg'} width={130} height={1000} alt="background" className="" />
-                        <p className=" text-gray-400">14k minted</p>
-                      </div>
-                </div>
-
-                {/* right */}
-              <div>
-                < Image src={'/mintpadtaiko.gif'} width={550} height={508} alt="background" className="" />
-              </div>
-              
-            </div>
-            { <TopSellers />}
+          <MintpadLine />
+          <MintNow />
             
            <div id="leaderboard" >
             <ProfileMetrics />
            </div>
-            { <TopCreators />}
 
     </main>
   );
