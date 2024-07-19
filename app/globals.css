@@ -53,10 +53,19 @@ border: 1px solid #777777;
   
 }
 
+.rotate-30 {
+  transform: rotate(30deg);
+}
 
+@keyframes rotate {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(540deg); /* 360 + 30 to complete the full circle plus the initial offset */
+  }
+}
 
-/* .profile-bg {
-  background-image: url('../public/profile-grad.svg');
-  background-size: cover;
-  background-position: center;
-} */
+.rotate-animation {
+  animation: rotate 30s linear infinite;
+}
