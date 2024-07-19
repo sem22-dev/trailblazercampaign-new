@@ -32,11 +32,11 @@ export default function Home() {
 
           <MintpadLine />
           <MintNow />
-            <TopSellers></TopSellers>
+            {/* <TopSellers /> */}
            <div id="leaderboard" >
             <ProfileMetrics />
            </div>
-           <TopCreators></TopCreators>
+           {/* <TopCreators /> */}
 
     </main>
   );

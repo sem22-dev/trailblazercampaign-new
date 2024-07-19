@@ -1,5 +1,5 @@
 
-"use client"
+"use client";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -14,22 +14,13 @@ export default function RocketLaunch() {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    if (inView) {
-      if (!isClicked) {
-        // Automatically animate when first in view
-        controls.start("visible").then(() => {
-          // Reset animation after it completes
-          setTimeout(() => {
-            controls.start("hidden");
-          }, 1000); // Duration of the animation
-        });
-      }
+    if (inView && !isClicked) {
+      controls.start("visible");
     }
   }, [controls, inView, isClicked]);
 
-  const handleRocketClick = useCallback(() => {
-    if (!isClicked) {
-      setIsClicked(true);
+  useEffect(() => {
+    if (isClicked) {
       controls.start("visible").then(() => {
         setTimeout(() => {
           controls.start("hidden").then(() => setIsClicked(false));
@@ -37,6 +28,12 @@ export default function RocketLaunch() {
       });
     }
   }, [controls, isClicked]);
+
+  const handleRocketClick = useCallback(() => {
+    if (!isClicked) {
+      setIsClicked(true);
+    }
+  }, [isClicked]);
 
   const rocketVariants = {
     hidden: { opacity: 1, y: 0 }, // Initial state where the rocket is visible

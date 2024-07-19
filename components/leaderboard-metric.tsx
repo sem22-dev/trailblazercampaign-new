@@ -2,60 +2,75 @@ import { useState, useEffect, SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export interface LeaderboardData {
-  message: string;
-  rank: number;
-  wallet: string;
-  rankScore: number;
-  username: string;
-  labels: string[] | string; // Updated type to handle both array and string
-  nfts: string;
-  avatar: string;
-  activity: string;
-  opensea: string;
-  twitter: string;
-  blockscan: string;
-  profile?: {
-    data?: string; // Assuming the base64 data is a string
+// test data from .json files
+import top721CollectionData from '@/top-721-collection-example.json';
+import top1155CollectionData from '@/top1155-collections-example.json';
+
+
+interface LeaderboardData {
+  address: string;
+  name: string;
+  type: string;
+  symbol: string;
+  additionalInfo: {
+    message: string;
+    result: {
+      cataloged: boolean;
+      contractAddress: string;
+      decimals: string;
+      name: string;
+      symbol: string;
+      totalSupply: string;
+      type: string;
+    };
+    status: string;
   };
+  tokenHolder: {
+    address: string;
+    value: string;
+  };
+  labels?: string[];
+  nftMinted?: string;
+  twitter?: string;
 }
 
-export default function LeaderboardMetrics() {
+export default function LeaderboardMetrics({ selectedFilter, searchTerm }: { selectedFilter: string; searchTerm: string }) {
   const [data, setData] = useState<LeaderboardData[]>([]);
+  const [filteredData, setFilteredData] = useState<LeaderboardData[]>([]);
 
   useEffect(() => {
-    fetch('/api/getdetails')
-      .then(response => response.json())
-      .then((data) => {
-        const modifiedData = data.map((item: LeaderboardData) => {
-          if (item.profile && item.profile.data) {
-            const asciiValues = item.profile.data;
-            const buffer = Buffer.from(asciiValues, 'base64'); 
-            const decodedString = buffer.toString('utf-8'); 
+    switch (selectedFilter) {
+      case "Top 721 Collection by Unique Transactions":
+        setData(top721CollectionData);
+        break;
+      case "Top 1155 Collections by Unique Transactions":
+        setData(top1155CollectionData);
+        break;
+      // Add more cases for other filters and their corresponding data
+      default:
+        setData([]);
+        break;
+    }
+  }, [selectedFilter]);
 
-            console.log('Decoded String:', decodedString); 
+  useEffect(() => {
+    const lowercasedSearchTerm = searchTerm.toLowerCase();
+    setFilteredData(
+      data.filter(item =>
+        (item.name?.toLowerCase().includes(lowercasedSearchTerm) ||
+         item.tokenHolder.address.toLowerCase().includes(lowercasedSearchTerm) || item.address.toLowerCase().includes(lowercasedSearchTerm))
+      )
+    );
+  }, [data, searchTerm]);
 
-            return {
-              ...item,
-              profile: {
-                ...item.profile,
-                data: decodedString 
-              },
-              labels: Array.isArray(item.labels) ? item.labels : [item.labels] // Convert string labels to an array
-            };
-          }
-          return {
-            ...item,
-            labels: Array.isArray(item.labels) ? item.labels : [item.labels] // Convert string labels to an array
-          };
-        });
-        setData(modifiedData);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        // Handle errors if needed
-      });
-  }, []);
+  const getValueOrDefault = (value: string | undefined, defaultValue: string = 'Not Available') => {
+    return value ? value : defaultValue;
+  };
+
+  const getColor = (label: string) => {
+    // Dummy function; replace with actual implementation
+    return 'text-green-500';
+  };
 
   return (
     <main className="min-h-screen my-8">
@@ -73,37 +88,42 @@ export default function LeaderboardMetrics() {
             </tr>
           </thead>
           <tbody className="bg-[#252B36]">
-            {data.map((item, index) => (
+            {filteredData.length > 0 ? filteredData.map((item, index) => (
               <tr key={index}>
-                <td className="px-2 py-4 whitespace-nowrap text-[#717A8C] text-sm font-medium">{item.rank}</td>
+                <td className="px-2 py-4 whitespace-nowrap text-[#717A8C] text-sm font-medium">{index + 1}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
-                <div className="flex items-center gap-4">
-  {item.profile && item.profile.data ? (
-    <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
-  ) : (
-    <Image src={`${item.avatar}`} height={35} width={35} alt="avatar" />
-  )}
-  <Link href={`/p/${item.wallet}`}>{item.username || item.wallet}</Link>
-</div>
+                  <div className="flex items-center gap-4">
+                    <Image src={`/avatar-example.svg`} height={35} width={35} alt="avatar" />
+                    <Link href={`/p/${item.tokenHolder.address}`}>
+                      {getValueOrDefault(item.name || item.tokenHolder.address)}
+                    </Link>
+                  </div>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <h1 className="border w-fit py-1 px-2 rounded-xl border-[#32D74B] text-[#32D74B] font-medium bg-[#274539]">
-                    {item.rankScore}
+                    {getValueOrDefault(item.additionalInfo.status)}
                   </h1>
                 </td>
                 <td className="px-2 py-4 w-[300px] text-sm font-medium">
                   <h1>
-                    {(Array.isArray(item.labels) ? item.labels : [item.labels]).map((label, idx) => (
-                      <span key={idx}>
-                        <span className={`text-xl font-bold mr-1 ${getColor(label)}`}>·</span>{label}
-                      </span>
-                    ))}
+                    {item.labels && item.labels.length > 0 ? (
+                      item.labels.map((label, idx) => (
+                        <span key={idx} className="mx-1">
+                          <span className={`text-xl font-bold mr-1 ${getColor(label)}`}>·</span>
+                          {label}
+                        </span>
+                      ))
+                    ) : (
+                      <span>Not Available</span>
+                    )}
                   </h1>
                 </td>
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">{item.nfts}</td>
+                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
+                  {getValueOrDefault(item.nftMinted)}
+                </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                  {item.activity ? (
-                    <a href={`${item.activity}`} target="_blank" rel="noopener noreferrer">
+                  {item.additionalInfo.result.contractAddress ? (
+                    <a href={`https://etherscan.io/address/${item.additionalInfo.result.contractAddress}`} target="_blank" rel="noopener noreferrer">
                       <span>Click here</span>
                     </a>
                   ) : (
@@ -111,15 +131,28 @@ export default function LeaderboardMetrics() {
                   )}
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium max-w-[50px]">
-                  <ContactIcons opensea={item.opensea} twitter={item.twitter} blockscan={item.blockscan} />
+                  <div>
+                    {item.twitter ? (
+                      <Link href={`https://twitter.com/${item.twitter}`} target="_blank" rel="noopener noreferrer">
+                        Twitter
+                      </Link>
+                    ) : (
+                      <span>Not Available</span>
+                    )}
+                  </div>
                 </td>
               </tr>
-            ))}
+            )) : (
+              <tr>
+                <td colSpan={7} className="px-2 py-4 text-center text-sm font-medium text-[#717A8C]">No results found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
     </main>
   );
+}
 
   function getColor(label: string) {
     switch (label) {
@@ -133,7 +166,6 @@ export default function LeaderboardMetrics() {
         return "text-white";
     }
   }
-}
 
 interface ContactIconsProps {
   opensea: string;
