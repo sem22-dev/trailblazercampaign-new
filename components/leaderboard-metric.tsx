@@ -24,7 +24,7 @@ export default function LeaderboardMetrics() {
   const [data, setData] = useState<LeaderboardData[]>([]);
 
   useEffect(() => {
-    fetch('https://raw.githubusercontent.com/chimmykk/trailblazercampaign/staging/test.json')
+    fetch('/api/getdetails')
       .then(response => response.json())
       .then((data) => {
         const modifiedData = data.map((item: LeaderboardData) => {
@@ -77,12 +77,14 @@ export default function LeaderboardMetrics() {
               <tr key={index}>
                 <td className="px-2 py-4 whitespace-nowrap text-[#717A8C] text-sm font-medium">{item.rank}</td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
-                  <div className="flex items-center gap-4">
-                    {item.profile && item.profile.data && (
-                      <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
-                    )}
-                    <Link href={`/p/${item.wallet}`}>{item.username || item.wallet}</Link>
-                  </div>
+                <div className="flex items-center gap-4">
+  {item.profile && item.profile.data ? (
+    <Image src={`${item.profile.data}`} height={35} width={35} alt="avatar" />
+  ) : (
+    <Image src={`${item.avatar}`} height={35} width={35} alt="avatar" />
+  )}
+  <Link href={`/p/${item.wallet}`}>{item.username || item.wallet}</Link>
+</div>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                   <h1 className="border w-fit py-1 px-2 rounded-xl border-[#32D74B] text-[#32D74B] font-medium bg-[#274539]">

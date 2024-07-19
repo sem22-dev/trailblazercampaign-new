@@ -32,8 +32,7 @@ const ProfileMetrics = () => {
         {currentCategory === 'mostMints' && <MostMints />}
         {currentCategory === 'mostHolders' && <MostHolders />}
         {currentCategory === 'mostTransfers' && <MostTransfers />}
-        {currentCategory === 'cars' && <Cars />}
-        {currentCategory === 'arts' && <Arts />}
+
       </div>
     </div>
   );
